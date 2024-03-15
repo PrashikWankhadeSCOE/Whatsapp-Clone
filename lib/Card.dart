@@ -5,12 +5,17 @@ class ChatModelClass {
   final String name;
   final String lastChat;
   final String date;
+  final String image;
   ChatModelClass(
-      {required this.name, required this.lastChat, required this.date});
+      {required this.name,
+      required this.lastChat,
+      required this.date,
+      required this.image});
 }
 
 List<ChatModelClass> list = [
   ChatModelClass(
+    image: 'https://image.ibb.co/k0wVTm/profile_pic.jpg',
     name: 'Prashik',
     date: '14/03/24',
     lastChat: 'hello how are you',

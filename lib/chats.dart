@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
+import 'package:whatsappdemo/chat_page.dart';
 
 class WhatsappChats extends StatefulWidget {
   const WhatsappChats({super.key});
@@ -61,7 +61,22 @@ class _WhatsappChatsState extends State<WhatsappChats> {
             shrinkWrap: true,
             itemCount: list.length,
             itemBuilder: (BuildContext context, index) {
-              return CardDemo(index: index);
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Chats(
+                          name: list[index].name,
+                          imageurl: list[index].image,
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: CardDemo(index: index),
+              );
             },
           ),
         ],
