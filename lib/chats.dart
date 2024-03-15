@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
 
@@ -57,6 +58,7 @@ class _WhatsappChatsState extends State<WhatsappChats> {
             ),
           ),
           ListView.builder(
+            shrinkWrap: true,
             itemCount: list.length,
             itemBuilder: (BuildContext context, index) {
               return CardDemo(index: index);
