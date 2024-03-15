@@ -68,8 +68,8 @@ class _WhatsappChatsState extends State<WhatsappChats> {
                     MaterialPageRoute(
                       builder: (context) {
                         return Chats(
-                          name: list[index].name,
-                          imageurl: list[index].image,
+                          name: list[index]['name'],
+                          imageurl: list[index]['picture'],
                         );
                       },
                     ),
