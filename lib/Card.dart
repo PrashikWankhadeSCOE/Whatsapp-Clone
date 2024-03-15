@@ -1,10 +1,5 @@
 // import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
-<<<<<<< HEAD
-=======
-import "package:flutter/widgets.dart";
-// import "package:google_fonts/google_fonts.dart";
->>>>>>> aad6a085533cd1dea54780b731767f06f8e04a37
 
 class ChatModelClass {
   final String name;
@@ -35,19 +30,6 @@ class CardDemo extends StatefulWidget {
 class _CardDemoState extends State<CardDemo> {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Scaffold(
-      body: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(50),
-              ),
-              color: Colors.purple,
-=======
     return Row(
       children: [
         Container(
@@ -56,7 +38,6 @@ class _CardDemoState extends State<CardDemo> {
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(50),
->>>>>>> aad6a085533cd1dea54780b731767f06f8e04a37
             ),
             color: Colors.purple,
           ),
@@ -76,7 +57,7 @@ class _CardDemoState extends State<CardDemo> {
                 Text(list[widget.index].name),
                 const Row(
                   children: [
-                     Icon(
+                    Icon(
                       Icons.done_all_rounded,
                       color: Colors.green,
                     ),
