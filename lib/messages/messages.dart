@@ -14,15 +14,19 @@ class SentMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: (isSent == 1)
+          ? const EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 40)
+          : const EdgeInsets.only(top: 8, bottom: 8, right: 40, left: 8),
       child: Row(
         mainAxisAlignment:
             (isSent == 1) ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: (isSent == 1) ? Color(0xffDCF7C5) : Color(0xfffafafa),
+                color: (isSent == 1)
+                    ? const Color(0xffDCF7C5)
+                    : const Color(0xfffafafa),
                 borderRadius: BorderRadius.circular(10)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -37,7 +41,7 @@ class SentMessage extends StatelessWidget {
                 Text(
                   messageTime,
                   style: GoogleFonts.openSans(
-                      fontSize: 11, color: Color.fromRGBO(0, 0, 0, 0.25)),
+                      fontSize: 11, color: const Color.fromRGBO(0, 0, 0, 0.25)),
                 )
               ],
             ),
