@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
 import 'package:whatsappdemo/chat_page.dart';
+import 'package:whatsappdemo/database/database_connection.dart';
 
 class WhatsappChats extends StatefulWidget {
   const WhatsappChats({super.key});
@@ -63,6 +64,9 @@ class _WhatsappChatsState extends State<WhatsappChats> {
             itemBuilder: (BuildContext context, index) {
               return GestureDetector(
                 onTap: () {
+                  setState(() {
+                    connectionMessage();
+                  });
                   Navigator.push(
                     context,
                     MaterialPageRoute(

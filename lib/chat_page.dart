@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'messages/messages.dart';
+
+List<Map> messageList = [
+  {
+    'message': 'Do you know what time it is ?',
+    'messageTime': '11:40',
+    'isSent': 1
+  },
+  {
+    'message': 'Yes its a sunny morning here',
+    'messageTime': '11:40',
+    'isSent': 0
+  }
+];
+
 class Chats extends StatefulWidget {
   const Chats({super.key, required this.name, required this.imageurl});
   final String imageurl;
@@ -34,6 +49,26 @@ class _ChatsState extends State<Chats> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: messageList.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return SentMessage(
+                          message: messageList[index]['message'],
+                          messageTime: messageList[index]['messageTime'],
+                          isSent: messageList[index]['isSent'],
+                        );
+                      }),
+                  const SentMessage(
+                    message: 'Do you know what time it is ?',
+                    messageTime: '11:40',
+                    // isSent: 0,
+                  ),
+                  const SentMessage(
+                    message: 'Yes its a sunny morning here',
+                    messageTime: '11:40',
+                    isSent: 1,
+                  ),
                   Container(
                     color: Colors.white,
                     child: Padding(
