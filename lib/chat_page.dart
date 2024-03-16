@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:whatsappdemo/database/database_connection.dart';
+
+import 'messages/messages.dart';
+
+List<Map> messageList = [];
 
 class Chats extends StatefulWidget {
   const Chats({super.key, required this.name, required this.imageurl});
@@ -11,6 +16,8 @@ class Chats extends StatefulWidget {
 }
 
 class _ChatsState extends State<Chats> {
+  TextEditingController messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +29,6 @@ class _ChatsState extends State<Chats> {
           ),
           Expanded(
             child: Container(
-              // width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
@@ -34,6 +40,16 @@ class _ChatsState extends State<Chats> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: messageList.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return SentMessage(
+                          message: messageList[index]['message'],
+                          messageTime: messageList[index]['messageTime'],
+                          isSent: messageList[index]['isSent'],
+                        );
+                      }),
                   Container(
                     color: Colors.white,
                     child: Padding(
@@ -50,6 +66,7 @@ class _ChatsState extends State<Chats> {
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
                                 child: TextField(
+                                  controller: messageController,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(20),
@@ -63,7 +80,18 @@ class _ChatsState extends State<Chats> {
                                             MainAxisAlignment.end,
                                         children: [
                                           GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              final now = DateTime.now();
+                                              String formatter =
+                                                  "${now.hour.toString()}:${now.minute.toString()}";
+                                              setState(() {
+                                                addMessage(
+                                                    message:
+                                                        messageController.text,
+                                                    messageTime: formatter,
+                                                    isSent: 0);
+                                              });
+                                            },
                                             child: const Icon(
                                               Icons.call_received,
                                               color: Color(0xff007AFF),
@@ -71,7 +99,18 @@ class _ChatsState extends State<Chats> {
                                             ),
                                           ),
                                           GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              final now = DateTime.now();
+                                              String formatter =
+                                                  "${now.hour.toString()}:${now.minute.toString()}";
+                                              setState(() {
+                                                addMessage(
+                                                    message:
+                                                        messageController.text,
+                                                    messageTime: formatter,
+                                                    isSent: 1);
+                                              });
+                                            },
                                             child: const Icon(
                                               Icons.send,
                                               color: Color(0xff007AFF),
