@@ -11,8 +11,11 @@ dependencies:
     sdk: flutter
   google_fonts: ^6.2.1
   intl_phone_field2: ^3.3.4
+
+  scrollable: ^1.0.5
   path: ^1.9.0
   sqflite: ^2.3.2
+
 
 dev_dependencies:
   flutter_test:

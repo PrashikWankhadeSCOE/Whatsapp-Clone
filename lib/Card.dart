@@ -125,29 +125,35 @@ class _CardDemoState extends State<CardDemo> {
           const SizedBox(
             width: 10,
           ),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(list[widget.index]['name']),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.done_all_rounded,
-                        color: Colors.green,
-                      ),
-                      Row(
-                        children: [
-                          Text(list[widget.index]['lastChat']),
-                        ],
-                      ),
-                    ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  list[widget.index]['name'],
+                  style: const TextStyle(
+                    fontSize: 18, // Adjust font size as needed
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.done_all_rounded,
+                      color: Colors.green,
+                    ),
+                    const SizedBox(width: 5),
+                    Expanded(
+                      child: Text(
+                        list[widget.index]['lastChat'],
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
