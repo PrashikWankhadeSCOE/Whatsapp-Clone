@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
-import 'package:whatsappdemo/chat_page.dart';
-import 'package:whatsappdemo/database/database_connection.dart';
 
 class WhatsappChats extends StatefulWidget {
   const WhatsappChats({super.key});
@@ -35,7 +33,7 @@ class _WhatsappChatsState extends State<WhatsappChats> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -58,29 +56,12 @@ class _WhatsappChatsState extends State<WhatsappChats> {
               ],
             ),
           ),
+          const Divider(),
           ListView.builder(
             shrinkWrap: true,
             itemCount: list.length,
             itemBuilder: (BuildContext context, index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    connectionMessage();
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Chats(
-                          name: list[index]['name'],
-                          imageurl: list[index]['picture'],
-                        );
-                      },
-                    ),
-                  );
-                },
-                child: CardDemo(index: index),
-              );
+              return CardDemo(index: index);
             },
           ),
         ],

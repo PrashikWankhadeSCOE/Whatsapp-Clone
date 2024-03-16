@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "chat_page.dart";
+import "database/database_connection.dart";
 
 List<Map<String, dynamic>> list = [
   {
@@ -115,47 +117,69 @@ class CardDemo extends StatefulWidget {
 class _CardDemoState extends State<CardDemo> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          CircleAvatar(
-            foregroundImage: NetworkImage(list[widget.index]['picture']),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          connectionMessage();
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return Chats(
+                name: list[widget.index]['name'],
+                imageurl: list[widget.index]['picture'],
+              );
+            },
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  list[widget.index]['name'],
-                  style: const TextStyle(
-                    fontSize: 18, // Adjust font size as needed
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Row(
+        );
+      },
+      child: Container(
+        decoration:
+            const BoxDecoration(border: Border(bottom: BorderSide(width: 0.1))),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            children: [
+              CircleAvatar(
+                foregroundImage: NetworkImage(list[widget.index]['picture']),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Icon(
-                      Icons.done_all_rounded,
-                      color: Colors.green,
-                    ),
-                    const SizedBox(width: 5),
-                    Expanded(
-                      child: Text(
-                        list[widget.index]['lastChat'],
-                        overflow: TextOverflow.ellipsis,
+                    Text(
+                      list[widget.index]['name'],
+                      style: const TextStyle(
+                        fontSize: 18, // Adjust font size as needed
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.done_all_rounded,
+                          color: Colors.green,
+                        ),
+                        const SizedBox(width: 5),
+                        Expanded(
+                          child: Text(
+                            list[widget.index]['lastChat'],
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
