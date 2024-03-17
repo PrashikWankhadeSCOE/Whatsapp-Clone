@@ -1,4 +1,6 @@
+import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
+import "package:flutter/rendering.dart";
 
 List<Map<String, dynamic>> list = [
   {
@@ -99,7 +101,15 @@ List<Map<String, dynamic>> list = [
     "picture": "https://image.ibb.co/eeqWbw/zen_1.jpg",
     "latest_timestamp": "19/11/2017",
     "lastChat": "Lol"
-  }
+  },
+  {
+    "id": 16,
+    "name": "Avy",
+    "picture":
+        "https://media.licdn.com/dms/image/D4D03AQGnxV3eRjNu1g/profile-displayphoto-shrink_800_800/0/1703592629183?e=2147483647&v=beta&t=ZU6D9dWLPXEz94GmoVORl79FwmqB4NToYmBAQ63qkdg",
+    "latest_timestamp": "19/11/2019",
+    "lastChat": "Ohh!"
+  },
 ];
 
 class CardDemo extends StatefulWidget {
@@ -115,48 +125,65 @@ class CardDemo extends StatefulWidget {
 class _CardDemoState extends State<CardDemo> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          CircleAvatar(
-            foregroundImage: NetworkImage(list[widget.index]['picture']),
+    return Scrollable(
+      // dragStartBehavior: DragStartBehavior.start,
+      physics: const ClampingScrollPhysics(),
+      viewportBuilder: (BuildContext context, ViewportOffset position) {
+        return Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+            color: Colors.white,
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  list[widget.index]['name'],
-                  style: const TextStyle(
-                    fontSize: 18, // Adjust font size as needed
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Row(
+
+          // alignment: Alignment.center,
+          // padding: const EdgeInsets.all(0),
+          // height: 40,
+          width: 500,
+          margin: EdgeInsets.all(1),
+          child: Row(
+            children: [
+              CircleAvatar(
+                foregroundImage: NetworkImage(list[widget.index]['picture']),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Icon(
-                      Icons.done_all_rounded,
-                      color: Colors.green,
-                    ),
-                    const SizedBox(width: 5),
-                    Expanded(
-                      child: Text(
-                        list[widget.index]['lastChat'],
-                        overflow: TextOverflow.ellipsis,
+                    Text(
+                      list[widget.index]['name'],
+                      style: const TextStyle(
+                        fontSize: 18, // Adjust font size as needed
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.done_all_rounded,
+                          color: Colors.green,
+                        ),
+                        const SizedBox(width: 5),
+                        Expanded(
+                          child: Text(
+                            list[widget.index]['lastChat'],
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

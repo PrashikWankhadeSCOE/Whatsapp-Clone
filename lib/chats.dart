@@ -82,6 +82,7 @@ class _WhatsappChatsState extends State<WhatsappChats> {
                 child: CardDemo(index: index),
               );
             },
+            physics: const ClampingScrollPhysics(),
           ),
         ],
       ),

@@ -6,7 +6,7 @@ dynamic database;
 
 Future<void> connectionMessage() async {
   database = await openDatabase(
-    join(await getDatabasesPath(), 'MessageDB.db'),
+    join(await getDatabasesPath(), 'Message1DB.db'),
     version: 1,
     onCreate: (db, version) {
       db.execute('''
