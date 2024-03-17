@@ -17,7 +17,7 @@ class Chats extends StatefulWidget {
 
 class _ChatsState extends State<Chats> {
   TextEditingController messageController = TextEditingController();
-
+  int len = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +48,7 @@ class _ChatsState extends State<Chats> {
                           message: messageList[index]['message'],
                           messageTime: messageList[index]['messageTime'],
                           isSent: messageList[index]['isSent'],
+                          len: messageList[index]['message'].length,
                         );
                       }),
                   Container(
