@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
 import "package:whatsappdemo/AuthorizationPage.dart";
+
 import "database/database_connection.dart";
 
+
 void main() async {
+  // databaseFactory = databaseFactoryFfi;
   WidgetsFlutterBinding.ensureInitialized();
   await connectionMessage();
   print('in main');
