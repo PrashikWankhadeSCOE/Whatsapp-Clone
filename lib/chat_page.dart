@@ -17,7 +17,7 @@ class Chats extends StatefulWidget {
 
 class _ChatsState extends State<Chats> {
   TextEditingController messageController = TextEditingController();
-
+  int len = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +37,7 @@ class _ChatsState extends State<Chats> {
                   ),
                 ),
               ),
+
               child: SingleChildScrollView(
                 reverse: true,
                 child: Column(
@@ -141,6 +142,7 @@ class _ChatsState extends State<Chats> {
                             ),
                           ],
                         ),
+
                       ),
                     )
                   ],

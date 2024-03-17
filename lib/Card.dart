@@ -1,8 +1,10 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
-import "package:flutter/rendering.dart";
-import "package:flutter/widgets.dart";
+
+import "chat_page.dart";
+import "database/database_connection.dart";
+
 
 List<Map<String, dynamic>> list = [
   {
@@ -127,6 +129,7 @@ class CardDemo extends StatefulWidget {
 class _CardDemoState extends State<CardDemo> {
   @override
   Widget build(BuildContext context) {
+
     return Scrollable(
       // dragStartBehavior: DragStartBehavior.start,
       physics: const ClampingScrollPhysics(
@@ -197,6 +200,7 @@ class _CardDemoState extends State<CardDemo> {
           ),
         );
       },
+
     );
   }
 }

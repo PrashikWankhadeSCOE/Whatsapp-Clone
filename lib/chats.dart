@@ -4,8 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
-import 'package:whatsappdemo/chat_page.dart';
-import 'package:whatsappdemo/database/database_connection.dart';
 
 class WhatsappChats extends StatefulWidget {
   const WhatsappChats({super.key});
@@ -37,6 +35,7 @@ class _WhatsappChatsState extends State<WhatsappChats> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
+
           Scrollable(
             viewportBuilder: (BuildContext context, ViewportOffset position) {
               return Padding(
@@ -64,6 +63,7 @@ class _WhatsappChatsState extends State<WhatsappChats> {
                   ],
                 ),
               );
+
             },
           ),
           Expanded(

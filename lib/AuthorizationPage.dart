@@ -12,6 +12,8 @@ class Authorization extends StatefulWidget {
 
 class _AuthorizationState extends State {
   TextEditingController numController = TextEditingController();
+  String country = 'United Kingdom';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +69,7 @@ class _AuthorizationState extends State {
             child: Row(
               children: [
                 Text(
-                  "India",
+                  country,
                   style: GoogleFonts.jost(
                     textStyle: const TextStyle(
                       fontSize: 17,
@@ -86,7 +88,10 @@ class _AuthorizationState extends State {
                         ),
                       );
                     },
-                    child: const Icon(Icons.arrow_forward_ios_outlined))
+                    child: const Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Color.fromRGBO(0, 122, 255, 1),
+                    ))
               ],
             ),
           ),
@@ -98,6 +103,11 @@ class _AuthorizationState extends State {
                   color: Colors.white,
                   child: Center(
                     child: IntlPhoneField(
+                      onCountryChanged: (cntry) {
+                        setState(() {
+                          country = cntry.name.toString();
+                        });
+                      },
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(1),
