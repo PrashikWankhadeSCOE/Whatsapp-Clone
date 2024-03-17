@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
 import 'package:whatsappdemo/chat_page.dart';
@@ -32,59 +33,66 @@ class _WhatsappChatsState extends State<WhatsappChats> {
         foregroundColor: const Color(0xff007AFF),
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Broadcast Lists',
-                  style: GoogleFonts.openSans(
-                    color: const Color(0xff007AFF),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  'New Group',
-                  style: GoogleFonts.openSans(
-                    color: const Color(0xff007AFF),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: list.length,
-            itemBuilder: (BuildContext context, index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    connectionMessage();
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Chats(
-                          name: list[index]['name'],
-                          imageurl: list[index]['picture'],
-                        );
-                      },
+      body: Expanded(
+        flex: 10,
+        child: Scrollable(
+            viewportBuilder: (BuildContext context, ViewportOffset position) {
+          return Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Broadcast Lists',
+                      style: GoogleFonts.openSans(
+                        color: const Color(0xff007AFF),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
                     ),
+                    Text(
+                      'New Group',
+                      style: GoogleFonts.openSans(
+                        color: const Color(0xff007AFF),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        connectionMessage();
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Chats(
+                              name: list[index]['name'],
+                              imageurl: list[index]['picture'],
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: CardDemo(index: index),
                   );
                 },
-                child: CardDemo(index: index),
-              );
-            },
-            physics: const ClampingScrollPhysics(),
-          ),
-        ],
+                physics: const ClampingScrollPhysics(),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
