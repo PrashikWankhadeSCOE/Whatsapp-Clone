@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
 import 'package:whatsappdemo/chat_page.dart';
@@ -35,29 +37,34 @@ class _WhatsappChatsState extends State<WhatsappChats> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Broadcast Lists',
-                  style: GoogleFonts.openSans(
-                    color: const Color(0xff007AFF),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
+          Scrollable(
+            viewportBuilder: (BuildContext context, ViewportOffset position) {
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Broadcast Lists',
+                      style: GoogleFonts.openSans(
+                        color: const Color(0xff007AFF),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'New Group',
+                      style: GoogleFonts.openSans(
+                        color: const Color(0xff007AFF),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  'New Group',
-                  style: GoogleFonts.openSans(
-                    color: const Color(0xff007AFF),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
+              );
+            },
           ),
           Expanded(
             child: ListView.builder(
