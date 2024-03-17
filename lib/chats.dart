@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
 
@@ -24,10 +25,30 @@ class _WhatsappChatsState extends State<WhatsappChats> {
           style: GoogleFonts.openSans(
               color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
         ),
-        actions: const [
-          Icon(
-            Icons.mode_edit_outline_outlined,
-            color: Color(0xff007AFF),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Self Information"),
+                      content: const Text('This is Pop Window'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Close"),
+                        )
+                      ],
+                    );
+                  });
+            },
+            child: const Icon(
+              Icons.mode_edit_outline_outlined,
+              color: Color(0xff007AFF),
+            ),
           )
         ],
         backgroundColor: const Color(0xffF6F6F6),
