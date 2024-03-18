@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/database/database_connection.dart';
 
@@ -43,7 +42,6 @@ class _ChatsState extends State<Chats> {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                        reverse: true,
                         shrinkWrap: true,
                         itemCount: messageList.length,
                         itemBuilder: (BuildContext context, index) {

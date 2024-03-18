@@ -32,7 +32,6 @@ Future<void> connectionMessage() async {
   final localdb = await database;
   messageList = await localdb.query('MESSAGE');
   list = await localdb.query('CHATS');
-  print(list);
 }
 
 Future addMessage({
@@ -63,7 +62,6 @@ Future addMessage({
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
   messageList = await localDB.query('MESSAGE');
-  print('message list updated');
 }
 
 Future addChats({
@@ -86,5 +84,14 @@ Future addChats({
       conflictAlgorithm: ConflictAlgorithm.replace);
 
   list = await localDB.query('CHATS');
-  print('chat list updated');
+}
+
+Future<void> deleteContact(int index) async {
+  final db = await database;
+  await db.delete(
+    'CHATS',
+    where: 'name = ?',
+    whereArgs: [list[index]['name']],
+  );
+  list = await db.query('CHATS');
 }
