@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/database/database_connection.dart';
 
@@ -37,12 +38,12 @@ class _ChatsState extends State<Chats> {
                   ),
                 ),
               ),
-              child: SingleChildScrollView(
-                reverse: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ListView.builder(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                        reverse: true,
                         shrinkWrap: true,
                         itemCount: messageList.length,
                         itemBuilder: (BuildContext context, index) {
@@ -53,89 +54,87 @@ class _ChatsState extends State<Chats> {
                             len: messageList[index]['message'].length,
                           );
                         }),
-                    Container(
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.add,
-                              color: Color(0xff007AFF),
-                              size: 30,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  child: TextField(
-                                    controller: messageController,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: const BorderSide(
-                                            width: 0.5,
-                                            color: Color(0xff8E8E93),
-                                          ),
+                  ),
+                  Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.add,
+                            color: Color(0xff007AFF),
+                            size: 30,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                child: TextField(
+                                  controller: messageController,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                          width: 0.5,
+                                          color: Color(0xff8E8E93),
                                         ),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            final now = DateTime.now();
-                                            String formatter =
-                                                "${now.hour.toString()}:${now.minute.toString()}";
-                                            setState(() {
-                                              addMessage(
-                                                  message:
-                                                      messageController.text,
-                                                  messageTime: formatter,
-                                                  isSent: 1);
-                                            });
-                                          },
-                                          child: const Icon(
-                                            Icons.send,
-                                            color: Color(0xff007AFF),
-                                            size: 30,
-                                          ),
-                                        )),
-                                  ),
+                                      ),
+                                      suffixIcon: GestureDetector(
+                                        onTap: () {
+                                          final now = DateTime.now();
+                                          String formatter =
+                                              "${now.hour.toString()}:${now.minute.toString()}";
+                                          setState(() {
+                                            addMessage(
+                                                message: messageController.text,
+                                                messageTime: formatter,
+                                                isSent: 1);
+                                          });
+                                        },
+                                        child: const Icon(
+                                          Icons.send,
+                                          color: Color(0xff007AFF),
+                                          size: 30,
+                                        ),
+                                      )),
                                 ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                final now = DateTime.now();
-                                String formatter =
-                                    "${now.hour.toString()}:${now.minute.toString()}";
-                                setState(() {
-                                  addMessage(
-                                      message: messageController.text,
-                                      messageTime: formatter,
-                                      isSent: 0);
-                                });
-                              },
-                              child: const Icon(
-                                Icons.call_received,
-                                color: Color(0xff007AFF),
-                                size: 30,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.camera_alt_outlined,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              final now = DateTime.now();
+                              String formatter =
+                                  "${now.hour.toString()}:${now.minute.toString()}";
+                              setState(() {
+                                addMessage(
+                                    message: messageController.text,
+                                    messageTime: formatter,
+                                    isSent: 0);
+                              });
+                            },
+                            child: const Icon(
+                              Icons.call_received,
                               color: Color(0xff007AFF),
                               size: 30,
                             ),
-                            const Icon(
-                              Icons.mic_none_outlined,
-                              color: Color(0xff007AFF),
-                              size: 30,
-                            ),
-                          ],
-                        ),
+                          ),
+                          const Icon(
+                            Icons.camera_alt_outlined,
+                            color: Color(0xff007AFF),
+                            size: 30,
+                          ),
+                          const Icon(
+                            Icons.mic_none_outlined,
+                            color: Color(0xff007AFF),
+                            size: 30,
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
           )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatsappdemo/Card.dart';
 
@@ -14,6 +15,39 @@ class WhatsappChats extends StatefulWidget {
 }
 
 class _WhatsappChatsState extends State<WhatsappChats> {
+  
+  void _startChatWithNewContact(BuildContext context) {
+    // Display a dialog or navigate to a new screen for adding a new contact
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('New Contact'),
+          content: TextField(
+            decoration: InputDecoration(labelText: 'Enter contact name'),
+            // Logic to handle entering new contact information
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Add'),
+              onPressed: () {
+                // Logic to add the new contact and start the chat
+                Navigator.of(context).pop();
+                _startChatWithNewContact(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +58,84 @@ class _WhatsappChatsState extends State<WhatsappChats> {
           style: GoogleFonts.openSans(
               color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
         ),
-        actions: const [
-          Icon(
-            Icons.mode_edit_outline_outlined,
-            color: Color(0xff007AFF),
-          )
+        actions: [
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Self Information"),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            height: 200,
+                            width: 200,
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(100),
+                              ),
+                              color: Colors.green,
+                            ),
+                            padding: const EdgeInsets.all(0),
+                            child: CircleAvatar(
+                              radius: 10,
+                              foregroundImage: NetworkImage(
+                                "https://media.licdn.com/dms/image/D4D03AQGnxV3eRjNu1g/profile-displayphoto-shrink_800_800/0/1703592629183?e=2147483647&v=beta&t=ZU6D9dWLPXEz94GmoVORl79FwmqB4NToYmBAQ63qkdg",
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Prashik Wankhade",
+                            style: GoogleFonts.openSans(
+                              textStyle: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "+91 86260 45643",
+                            style: GoogleFonts.openSans(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Close"),
+                        )
+                      ],
+                    );
+                  });
+            },
+            child: const Icon(
+              Icons.mode_edit_outline_outlined,
+              color: Color(0xff007AFF),
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+        GestureDetector( 
+          child:Icon(Icons.contact_emergency_outlined),
+         onTap: () {
+            _startChatWithNewContact(context);
+          },
+        ),
+          const SizedBox(
+            width: 10,
+          ),
         ],
         backgroundColor: const Color(0xffF6F6F6),
         foregroundColor: const Color(0xff007AFF),
