@@ -23,7 +23,7 @@ class SentMessage extends StatelessWidget {
         mainAxisAlignment:
             (isSent == 1) ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
-          (len > 45)
+          (len > 40)
               ? Expanded(
                   child: messageCard(),
                 )

@@ -42,6 +42,7 @@ class _ChatsState extends State<Chats> {
                 children: [
                   Expanded(
                     child: ListView.builder(
+                        controller: ScrollController(initialScrollOffset: 1),
                         shrinkWrap: true,
                         itemCount: messageList.length,
                         itemBuilder: (BuildContext context, index) {
@@ -88,6 +89,7 @@ class _ChatsState extends State<Chats> {
                                                 message: messageController.text,
                                                 messageTime: formatter,
                                                 isSent: 1);
+                                            messageController.clear();
                                           });
                                         },
                                         child: const Icon(
@@ -110,6 +112,7 @@ class _ChatsState extends State<Chats> {
                                     message: messageController.text,
                                     messageTime: formatter,
                                     isSent: 0);
+                                messageController.clear();
                               });
                             },
                             child: const Icon(

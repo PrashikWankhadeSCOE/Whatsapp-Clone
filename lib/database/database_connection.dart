@@ -95,3 +95,9 @@ Future<void> deleteContact(int index) async {
   );
   list = await db.query('CHATS');
 }
+
+Future<void> refresh() async {
+  final db = await database;
+  list = await db.query('CHATS');
+  messageList = await db.query('MESSAGE');
+}
