@@ -50,7 +50,7 @@ class _ChatsState extends State<Chats> {
                             message: messageList[index]['message'],
                             messageTime: messageList[index]['messageTime'],
                             isSent: messageList[index]['isSent'],
-                            len: messageController.text.length,
+                            len: messageList[index]['message'].length,
                           );
                         }),
                     Container(
