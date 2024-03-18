@@ -15,31 +15,41 @@ class WhatsappChats extends StatefulWidget {
 }
 
 class _WhatsappChatsState extends State<WhatsappChats> {
-  
   void _startChatWithNewContact(BuildContext context) {
     // Display a dialog or navigate to a new screen for adding a new contact
+    TextEditingController newContactController = TextEditingController();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('New Contact'),
+          title: const Text('New Contact'),
           content: TextField(
-            decoration: InputDecoration(labelText: 'Enter contact name'),
+            controller: newContactController,
+            decoration: const InputDecoration(labelText: 'Enter contact name'),
             // Logic to handle entering new contact information
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Add'),
+              child: const Text('Add'),
               onPressed: () {
-                // Logic to add the new contact and start the chat
+                final now = DateTime.now();
+                String formatter =
+                    "${now.hour.toString()}:${now.minute.toString()}";
+                setState(() {
+                  if (newContactController.text.trim().isNotEmpty) {
+                    addChats(
+                        name: newContactController.text.trim(),
+                        latest_timestamp: formatter);
+                  }
+                });
                 Navigator.of(context).pop();
-                _startChatWithNewContact(context);
               },
             ),
           ],
@@ -59,80 +69,16 @@ class _WhatsappChatsState extends State<WhatsappChats> {
               color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
         ),
         actions: [
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text("Self Information"),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                              color: Colors.green,
-                            ),
-                            padding: const EdgeInsets.all(0),
-                            child: CircleAvatar(
-                              radius: 10,
-                              foregroundImage: NetworkImage(
-                                "https://media.licdn.com/dms/image/D4D03AQGnxV3eRjNu1g/profile-displayphoto-shrink_800_800/0/1703592629183?e=2147483647&v=beta&t=ZU6D9dWLPXEz94GmoVORl79FwmqB4NToYmBAQ63qkdg",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Prashik Wankhade",
-                            style: GoogleFonts.openSans(
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            "+91 86260 45643",
-                            style: GoogleFonts.openSans(
-                              textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Close"),
-                        )
-                      ],
-                    );
-                  });
-            },
-            child: const Icon(
-              Icons.mode_edit_outline_outlined,
-              color: Color(0xff007AFF),
-            ),
-          ),
+          selfInfo(context),
           const SizedBox(
             width: 20,
           ),
-        GestureDetector( 
-          child:Icon(Icons.contact_emergency_outlined),
-         onTap: () {
-            _startChatWithNewContact(context);
-          },
-        ),
+          GestureDetector(
+            child: const Icon(Icons.contact_emergency_outlined),
+            onTap: () {
+              _startChatWithNewContact(context);
+            },
+          ),
           const SizedBox(
             width: 10,
           ),
@@ -201,6 +147,74 @@ class _WhatsappChatsState extends State<WhatsappChats> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  GestureDetector selfInfo(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Self Information"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 200,
+                      width: 200,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(100),
+                        ),
+                        color: Colors.green,
+                      ),
+                      padding: const EdgeInsets.all(0),
+                      child: const CircleAvatar(
+                        radius: 10,
+                        foregroundImage: NetworkImage(
+                          "https://media.licdn.com/dms/image/D4D03AQGnxV3eRjNu1g/profile-displayphoto-shrink_800_800/0/1703592629183?e=2147483647&v=beta&t=ZU6D9dWLPXEz94GmoVORl79FwmqB4NToYmBAQ63qkdg",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Prashik Wankhade",
+                      style: GoogleFonts.openSans(
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "+91 86260 45643",
+                      style: GoogleFonts.openSans(
+                        textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Close"),
+                  )
+                ],
+              );
+            });
+      },
+      child: const Icon(
+        Icons.mode_edit_outline_outlined,
+        color: Color(0xff007AFF),
       ),
     );
   }
